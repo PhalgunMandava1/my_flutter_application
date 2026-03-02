@@ -18,7 +18,7 @@ class RegistrationForm extends StatelessWidget {
           child: TabBar(
             tabs: [
               _buildTab(Icons.person, "Profile", Colors.blue),
-              _buildTab(Icons.settings, "Settings", Colors.green),
+              _buildTab(Icons.settings, "Settings", Colors.greenAccent),
             ],
           ),
         ),
@@ -84,9 +84,7 @@ class RegistrationForm extends StatelessWidget {
 
                 const SizedBox(height: 20),
 
-                const Center(
-                  child: CircularProgressIndicator(),
-                ),
+                
               ],
             ),
 
