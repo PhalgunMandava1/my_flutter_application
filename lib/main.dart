@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'registration_form.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,221 +11,234 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: HomeScreen(),
+      home: LoginPage(),
     );
   }
 }
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
-
-  @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
-  
-  final TextEditingController dobController = TextEditingController();
-  final TextEditingController fatherController = TextEditingController();
-  final TextEditingController motherController = TextEditingController();
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController phoneController = TextEditingController();
-
-  String? selectedGender;
-
-  bool reading = false;
-  bool traveling = false;
-  bool music = false;
-  bool sports = false;
+class LoginPage extends StatelessWidget {
+  const LoginPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Registration Form")),
+      backgroundColor: const Color(0xFFEFF3F6),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            
-            const TextField(
-              decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                hintText: "Enter your name",
+            // Top Design
+            Container(
+              height: 150,
+              decoration: const BoxDecoration(
+                color: Colors.black87,
+                borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(50),
+                  bottomRight: Radius.circular(50),
+                ),
               ),
-            ),
-
-            const SizedBox(height: 15),
-
-            TextField(
-              controller: dobController,
-              readOnly: true,
-              decoration: InputDecoration(
-                border: const OutlineInputBorder(),
-                hintText: "DD/MM/YYYY",
-                suffixIcon: IconButton(
-                  icon: const Icon(Icons.calendar_today),
-                  onPressed: () async {
-                    DateTime? pickedDate = await showDatePicker(
-                      context: context,
-                      initialDate: DateTime(2000),
-                      firstDate: DateTime(1900),
-                      lastDate: DateTime.now(),
-                    );
-
-                    if (pickedDate != null) {
-                      dobController.text =
-                          "${pickedDate.day}/${pickedDate.month}/${pickedDate.year}";
-                    }
-                  },
+              child: const Center(
+                child: CircleAvatar(
+                  radius: 40,
+                  backgroundColor: Colors.yellow,
+                  child: Icon(Icons.person, size: 40, color: Colors.white),
                 ),
               ),
             ),
 
-            const SizedBox(height: 15),
-
-            TextField(
-              controller: phoneController,
-              keyboardType: TextInputType.number,
-              inputFormatters: [
-                FilteringTextInputFormatter.digitsOnly,
-                LengthLimitingTextInputFormatter(10),
-              ],
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                hintText: "Phone Number",
-              ),
-            ),
-
-            const SizedBox(height: 15),
-
-            TextField(
-              controller: fatherController,
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                hintText: "Father Name",
-              ),
-            ),
-
-            const SizedBox(height: 15),
-
-            TextField(
-              controller: motherController,
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                hintText: "Mother Name",
-              ),
-            ),
-
-            const SizedBox(height: 15),
- 
-            TextField(
-              controller: emailController,
-              keyboardType: TextInputType.emailAddress,
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                hintText: "Email",
-              ),
-            ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 40),
 
             const Text(
-              "Gender",
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-            ),
-            Row(
-              children: [
-                Radio<String>(
-                  value: "Male",
-                  groupValue: selectedGender,
-                  onChanged: (v) => setState(() => selectedGender = v),
-                ),
-                const Text("Male"),
-                Radio<String>(
-                  value: "Female",
-                  groupValue: selectedGender,
-                  onChanged: (v) => setState(() => selectedGender = v),
-                ),
-                const Text("Female"),
-                Radio<String>(
-                  value: "Others",
-                  groupValue: selectedGender,
-                  onChanged: (v) => setState(() => selectedGender = v),
-                ),
-                const Text("Others"),
-              ],
-            ),
-
-            const SizedBox(height: 20),
-
-            const Text(
-              "Hobbies",
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-            ),
-
-            CheckboxListTile(
-              title: const Text("Reading"),
-              value: reading,
-              onChanged: (v) => setState(() => reading = v!),
-            ),
-            CheckboxListTile(
-              title: const Text("Traveling"),
-              value: traveling,
-              onChanged: (v) => setState(() => traveling = v!),
-            ),
-            CheckboxListTile(
-              title: const Text("Music"),
-              value: music,
-              onChanged: (v) => setState(() => music = v!),
-            ),  
-            CheckboxListTile(
-              title: const Text("Others"),
-              value: sports,
-              onChanged: (v) => setState(() => sports = v!),
-            ),
-
-            const SizedBox(height: 15),
- 
-            const TextField(
-              maxLines: 3,
-              decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                hintText: "Enter your address",
+              "SIGN IN",
+              style: TextStyle(
+                fontSize: 22,
+                fontWeight: FontWeight.bold,
               ),
             ),
 
-            const SizedBox(height: 25),
+            const SizedBox(height: 30),
 
-            Center(
-              child: ElevatedButton(
-                onPressed: () {
-                  List<String> hobbies = [];
-                  if (reading) hobbies.add("Reading");
-                  if (traveling) hobbies.add("Traveling");
-                  if (music) hobbies.add("Music");
-                  if (sports) hobbies.add("Sports");
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 25),
+              child: Column(
+                children: [
+                  buildTextField("Email Address", Icons.email),
+                  const SizedBox(height: 20),
+                  buildTextField("Password", Icons.lock, isPassword: true),
 
-                  print("Phone: ${phoneController.text}");
-                  print("Father: ${fatherController.text}");
-                  print("Mother: ${motherController.text}");
-                  print("Email: ${emailController.text}");
-                  print("Gender: $selectedGender");
-                  print("Hobbies: $hobbies");
+                  const SizedBox(height: 10),
 
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) => const RegistrationForm(),
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: TextButton(
+                      onPressed: () {},
+                      child: const Text("Forgot Password?"),
                     ),
-                  );
-                },
-                child: const Text("Submit"),
-                
+                  ),
+
+                  const SizedBox(height: 20),
+
+                  SizedBox(
+                    width: double.infinity,
+                    height: 50,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.blue,
+                      ),
+                      onPressed: () {},
+                      child: const Text("LOGIN"),
+                    ),
+                  ),
+
+                  const SizedBox(height: 20),
+
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text("Don't have an account? "),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const RegisterPage()),
+                          );
+                        },
+                        child: const Text(
+                          "Create Account",
+                          style: TextStyle(
+                            color: Colors.blue,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      )
+                    ],
+                  )
+                ],
               ),
-            ),
+            )
           ],
         ),
       ),
     );
   }
+}
+
+class RegisterPage extends StatelessWidget {
+  const RegisterPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: const Color(0xFFEFF3F6),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            // Top Design
+            Container(
+              height: 220,
+              decoration: const BoxDecoration(
+                color: Colors.blue,
+                borderRadius: BorderRadius.only(
+                  bottomRight: Radius.circular(100),
+                  bottomLeft: Radius.circular(100),
+                ),
+              ),
+              child: const Center(
+                child: CircleAvatar(
+                  radius: 40,
+                  backgroundColor: Colors.black87,
+                  child: Icon(Icons.person_add,
+                      size: 40, color: Colors.white),
+                ),
+              ),
+            ),
+
+            const SizedBox(height: 10),
+
+            const Text(
+              "CREATE ACCOUNT",
+              style: TextStyle(
+                fontSize: 22,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+
+            const SizedBox(height: 20),
+
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 25),
+              child: Column(
+                children: [
+                  buildTextField("Username", Icons.person),
+                  const SizedBox(height: 20),
+                  buildTextField("Email Address", Icons.email),
+                  const SizedBox(height: 20),
+                  buildTextField("Mobile Number", Icons.phone),
+                  const SizedBox(height: 20),
+                  buildTextField("Password", Icons.lock, isPassword: true),
+                  const SizedBox(height: 20),
+                  buildTextField("Re enter Password", Icons.lock, isPassword: true),
+
+                  const SizedBox(height: 20),
+
+                  SizedBox(
+                    width: double.infinity,
+                    height: 50,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.yellow,
+                      ),
+                      onPressed: () {},
+                      child: const Text(
+                        "SUBMIT",
+                        style: TextStyle(color: Colors.black),
+                      ),
+                    ),
+                  ),
+
+                  const SizedBox(height: 20),
+
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text("Already have an account? "),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.pop(context);
+                        },
+                        child: const Text(
+                          "Sign In",
+                          style: TextStyle(
+                            color: Colors.blue,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      )
+                    ],
+                  )
+                ],
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+Widget buildTextField(String hint, IconData icon,
+    {bool isPassword = false}) {
+  return TextField(
+    obscureText: isPassword,
+    decoration: InputDecoration(
+      prefixIcon: Icon(icon),
+      hintText: hint,
+      filled: true,
+      fillColor: Colors.grey,
+      border: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(10),
+        borderSide: BorderSide.none,
+      ),
+    ),
+  );
 }
