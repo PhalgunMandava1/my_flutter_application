@@ -91,6 +91,7 @@ class LoginPage extends StatelessWidget {
   }
 }
 
+
 class RegisterPage extends StatelessWidget {
   const RegisterPage({super.key});
 
