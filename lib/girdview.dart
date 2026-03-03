@@ -25,16 +25,14 @@ class StatsPage extends StatefulWidget {
 
 class _StatsPageState extends State<StatsPage>
     with SingleTickerProviderStateMixin {
-
   late TabController _tabController;
-  int _currentIndex = 0;
+  int _currentIndex = 1;
 
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 2, vsync: this);
+    _tabController = TabController(length: 3, vsync: this);
   }
-
   Widget statCard(String title, String value, Color color) {
     return Container(
       alignment: Alignment.center,
@@ -47,14 +45,16 @@ class _StatsPageState extends State<StatsPage>
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text(title,
-              style: const TextStyle(color: Colors.white70)),
+          Text(title, style: const TextStyle(color: Colors.white70)),
           const SizedBox(height: 10),
-          Text(value,
-              style: const TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white)),
+          Text(
+            value,
+            style: const TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+            ),
+          ),
         ],
       ),
     );
@@ -114,7 +114,7 @@ class _StatsPageState extends State<StatsPage>
           ),
         ],
       ),
-    
+
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
         selectedItemColor: Colors.blue,
@@ -125,22 +125,10 @@ class _StatsPageState extends State<StatsPage>
           });
         },
         items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: "Home",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.bar_chart),
-            label: "Stats",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: "Profile",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.card_giftcard),
-            label:"Rewards",
-          )
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
+          BottomNavigationBarItem(icon: Icon(Icons.bar_chart), label: "Stats"),
+          BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
+          BottomNavigationBarItem(icon: Icon(Icons.card_giftcard),label: "Rewards"),
         ],
       ),
     );
