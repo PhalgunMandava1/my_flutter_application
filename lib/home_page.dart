@@ -13,18 +13,15 @@ class HomePage extends StatelessWidget {
         return Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-
             ListTile(
               leading: const Icon(Icons.share),
-              title: const Text("Share"),
+              title: const Text("Share App"),
               onTap: () {
                 Navigator.pop(context);
 
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    content: Text("Share clicked"),
-                  ),
-                );
+                ScaffoldMessenger.of(
+                  context,
+                ).showSnackBar(const SnackBar(content: Text("Share clicked")));
               },
             ),
 
@@ -35,23 +32,19 @@ class HomePage extends StatelessWidget {
                 Navigator.pop(context);
 
                 ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    content: Text("Get link clicked"),
-                  ),
+                  const SnackBar(content: Text("Get link clicked")),
                 );
               },
             ),
 
             ListTile(
               leading: const Icon(Icons.edit),
-              title: const Text("Edit name"),
+              title: const Text("Edit Profile"),
               onTap: () {
                 Navigator.pop(context);
 
                 ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    content: Text("Edit name clicked"),
-                  ),
+                  const SnackBar(content: Text("Edit name clicked")),
                 );
               },
             ),
@@ -63,13 +56,10 @@ class HomePage extends StatelessWidget {
                 Navigator.pop(context);
 
                 ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    content: Text("Delete collection clicked"),
-                  ),
+                  const SnackBar(content: Text("Delete collection clicked")),
                 );
               },
             ),
-
           ],
         );
       },
@@ -79,10 +69,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
-      appBar: AppBar(
-        title: const Text("Home"),
-      ),
+      appBar: AppBar(title: const Text("Home")),
 
       body: Center(
         child: ElevatedButton(
