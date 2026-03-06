@@ -1,16 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/Google_page.dart' hide HomePage;
+import 'package:flutter_application_1/Google_page.dart';
 import 'package:flutter_application_1/Whatsapp_page.dart';
 import 'package:flutter_application_1/Facebook_page.dart';
-import 'package:flutter_application_1/google_page.dart';
 import 'package:flutter_application_1/gridview.dart';
 import 'register_page.dart';
 import 'login_page.dart';
-import 'home_page.dart';
 import 'Facebook_page.dart';
-import 'Google_page.dart' hide HomePage;
 import 'Whatsapp_page.dart';
-import 'stats_page.dart' hide HomePage;
+import 'stats_page.dart';
 import 'rewards_page.dart';
 import 'goal_page.dart';
 
