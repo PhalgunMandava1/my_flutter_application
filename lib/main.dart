@@ -22,8 +22,6 @@ class MyApp extends StatelessWidget {
   }
 }
 
-//////////////// SPLASH SCREEN //////////////////
-
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 
@@ -62,8 +60,6 @@ class _SplashScreenState extends State<SplashScreen> {
     );
   }
 }
-
-//////////////// LOGIN PAGE //////////////////
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -176,8 +172,6 @@ class _LoginPageState extends State<LoginPage> {
   }
 }
 
-//////////////// REGISTER PAGE //////////////////
-
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
 
@@ -252,8 +246,6 @@ class _RegisterPageState extends State<RegisterPage> {
     );
   }
 }
-
-//////////////// MAIN PAGE //////////////////
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
@@ -343,8 +335,6 @@ class _MainPageState extends State<MainPage> {
   }
 }
 
-//////////////// HOME //////////////////
-
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
@@ -427,8 +417,6 @@ class HomeScreen extends StatelessWidget {
   }
 }
 
-//////////////// SEARCH //////////////////
-
 class SearchScreen extends StatelessWidget {
   const SearchScreen({super.key});
 
@@ -442,8 +430,6 @@ class SearchScreen extends StatelessWidget {
     );
   }
 }
-
-//////////////// CART //////////////////
 
 class CartPage extends StatefulWidget {
   const CartPage({super.key});
@@ -591,8 +577,6 @@ class _CartPageState extends State<CartPage> {
   }
 }
 
-//////////////// PAYMENT //////////////////
-
 class PaymentPage extends StatefulWidget {
   const PaymentPage({super.key});
 
@@ -682,8 +666,6 @@ class _PaymentPageState extends State<PaymentPage> {
     );
   }
 }
-
-//////////////// PROFILE //////////////////
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
