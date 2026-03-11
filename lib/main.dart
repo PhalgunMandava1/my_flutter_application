@@ -32,7 +32,6 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-
   @override
   void initState() {
     super.initState();
@@ -73,28 +72,21 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
   void loginUser() {
-
     String email = emailController.text;
     String password = passwordController.text;
 
     if (email.isEmpty || password.isEmpty) {
-
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text("Email and Password cannot be empty")),
       );
-
-    }
-
-    else if (registeredEmail == null) {
-
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Please register first")),
-      );
+    } else if (registeredEmail == null) {
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(const SnackBar(content: Text("Please register first")));
 
       Future.delayed(const Duration(seconds: 2), () {
         Navigator.push(
@@ -102,30 +94,20 @@ class _LoginPageState extends State<LoginPage> {
           MaterialPageRoute(builder: (context) => const RegisterPage()),
         );
       });
-
-    }
-
-    else if (email != registeredEmail || password != registeredPassword) {
-
+    } else if (email != registeredEmail || password != registeredPassword) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text("Invalid email or password")),
       );
-
-    }
-
-    else {
-
+    } else {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => const MainPage()),
       );
-
     }
   }
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(title: const Text("Login")),
 
@@ -133,7 +115,6 @@ class _LoginPageState extends State<LoginPage> {
         padding: const EdgeInsets.all(20),
         child: Column(
           children: [
-
             TextField(
               controller: emailController,
               decoration: const InputDecoration(
@@ -155,10 +136,7 @@ class _LoginPageState extends State<LoginPage> {
 
             const SizedBox(height: 30),
 
-            ElevatedButton(
-              onPressed: loginUser,
-              child: const Text("Login"),
-            ),
+            ElevatedButton(onPressed: loginUser, child: const Text("Login")),
 
             TextButton(
               onPressed: () {
@@ -168,7 +146,7 @@ class _LoginPageState extends State<LoginPage> {
                 );
               },
               child: const Text("Don't have an account? Register"),
-            )
+            ),
           ],
         ),
       ),
@@ -186,17 +164,14 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
-
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
   void registerUser() {
-
     if (emailController.text.isEmpty || passwordController.text.isEmpty) {
-
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Fields cannot be empty")),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(const SnackBar(content: Text("Fields cannot be empty")));
 
       return;
     }
@@ -212,7 +187,6 @@ class _RegisterPageState extends State<RegisterPage> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(title: const Text("Register")),
 
@@ -220,7 +194,6 @@ class _RegisterPageState extends State<RegisterPage> {
         padding: const EdgeInsets.all(20),
         child: Column(
           children: [
-
             TextField(
               controller: emailController,
               decoration: const InputDecoration(
@@ -245,7 +218,7 @@ class _RegisterPageState extends State<RegisterPage> {
             ElevatedButton(
               onPressed: registerUser,
               child: const Text("Register"),
-            )
+            ),
           ],
         ),
       ),
@@ -263,21 +236,13 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
-
   int currentIndex = 0;
 
-  final pages = const [
-    HomeScreen(),
-    SearchScreen(),
-    CartPage(),
-    ProfilePage(),
-  ];
+  final pages = const [HomeScreen(), SearchScreen(), CartPage(), ProfilePage()];
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
-
       body: pages[currentIndex],
 
       bottomNavigationBar: BottomNavigationBar(
@@ -293,22 +258,17 @@ class _MainPageState extends State<MainPage> {
         },
 
         items: [
+          const BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
 
           const BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              label: "Home"
-          ),
-
-          const BottomNavigationBarItem(
-              icon: Icon(Icons.search),
-              label: "Search"
+            icon: Icon(Icons.search),
+            label: "Search",
           ),
 
           BottomNavigationBarItem(
             label: "Cart",
             icon: Stack(
               children: [
-
                 const Icon(Icons.shopping_cart),
 
                 if (cartItems.isNotEmpty)
@@ -328,14 +288,14 @@ class _MainPageState extends State<MainPage> {
                         ),
                       ),
                     ),
-                  )
+                  ),
               ],
             ),
           ),
 
           const BottomNavigationBarItem(
-              icon: Icon(Icons.person),
-              label: "Account"
+            icon: Icon(Icons.person),
+            label: "Account",
           ),
         ],
       ),
@@ -348,19 +308,12 @@ class _MainPageState extends State<MainPage> {
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
-  Widget plantCard(
-      BuildContext context,
-      String name,
-      String price,
-      ) {
-
+  Widget plantCard(BuildContext context, String name, String price) {
     return Container(
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(16),
-        boxShadow: [
-          BoxShadow(color: Colors.grey.shade300, blurRadius: 5)
-        ],
+        boxShadow: [BoxShadow(color: Colors.grey.shade300, blurRadius: 5)],
       ),
 
       padding: const EdgeInsets.all(10),
@@ -368,8 +321,7 @@ class HomeScreen extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-
-          const Icon(Icons.local_florist,size:60,color:Colors.green),
+          const Icon(Icons.local_florist, size: 60, color: Colors.green),
 
           Text(name, style: const TextStyle(fontWeight: FontWeight.bold)),
 
@@ -379,19 +331,15 @@ class HomeScreen extends StatelessWidget {
 
           ElevatedButton(
             onPressed: () {
+              cartItems.add({"name": name, "price": price});
 
-              cartItems.add({
-                "name": name,
-                "price": price,
-              });
-
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text("$name added to cart")),
-              );
+              ScaffoldMessenger.of(
+                context,
+              ).showSnackBar(SnackBar(content: Text("$name added to cart")));
             },
 
             child: const Text("Add to Cart"),
-          )
+          ),
         ],
       ),
     );
@@ -399,7 +347,6 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(title: const Text("Welcome")),
 
@@ -412,14 +359,12 @@ class HomeScreen extends StatelessWidget {
           mainAxisSpacing: 10,
 
           children: [
-
-            plantCard(context,"Aloe Vera","\$18"),
-            plantCard(context,"Snake Plant","\$20"),
-            plantCard(context,"Peace Lily","\$22"),
-            plantCard(context,"Indoor Palm","\$30"),
-            plantCard(context,"Mango Tree","\$25"),
-            plantCard(context,"Lemon Tree","\$28"),
-
+            plantCard(context, "Aloe Vera", "\$18"),
+            plantCard(context, "Snake Plant", "\$20"),
+            plantCard(context, "Peace Lily", "\$22"),
+            plantCard(context, "Indoor Palm", "\$30"),
+            plantCard(context, "Mango Tree", "\$25"),
+            plantCard(context, "Lemon Tree", "\$28"),
           ],
         ),
       ),
@@ -434,11 +379,8 @@ class SearchScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return const Scaffold(
-      body: Center(
-        child: Text("Search Page", style: TextStyle(fontSize: 22)),
-      ),
+      body: Center(child: Text("Search Page", style: TextStyle(fontSize: 22))),
     );
   }
 }
@@ -453,9 +395,7 @@ class CartPage extends StatefulWidget {
 }
 
 class _CartPageState extends State<CartPage> {
-
   int getTotal() {
-
     int total = 0;
 
     for (var item in cartItems) {
@@ -467,77 +407,70 @@ class _CartPageState extends State<CartPage> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(title: const Text("My Cart")),
 
       body: Column(
         children: [
-
           Expanded(
             child: cartItems.isEmpty
                 ? const Center(
-              child: Text(
-                "Your Cart is Empty",
-                style: TextStyle(fontSize: 22),
-              ),
-            )
+                    child: Text(
+                      "Your Cart is Empty",
+                      style: TextStyle(fontSize: 22),
+                    ),
+                  )
                 : ListView.builder(
-              itemCount: cartItems.length,
-              itemBuilder: (context, index) {
+                    itemCount: cartItems.length,
+                    itemBuilder: (context, index) {
+                      final item = cartItems[index];
 
-                final item = cartItems[index];
+                      return ListTile(
+                        leading: const Icon(Icons.local_florist),
+                        title: Text(item["name"]!),
+                        subtitle: Text(item["price"]!),
 
-                return ListTile(
-                  leading: const Icon(Icons.local_florist),
-                  title: Text(item["name"]!),
-                  subtitle: Text(item["price"]!),
+                        trailing: Column(
+                          children: [
+                            TextButton(
+                              onPressed: () {
+                                setState(() {
+                                  savedItems.add(item);
+                                  cartItems.removeAt(index);
+                                });
+                              },
+                              child: const Text("Save Later"),
+                            ),
 
-                  trailing: Column(
-                    children: [
-
-                      TextButton(
-                        onPressed: (){
-                          setState(() {
-                            savedItems.add(item);
-                            cartItems.removeAt(index);
-                          });
-                        },
-                        child: const Text("Save Later"),
-                      ),
-
-                      TextButton(
-                        onPressed: (){
-                          setState(() {
-                            cartItems.removeAt(index);
-                          });
-                        },
-                        child: const Text("Remove"),
-                      ),
-
-                    ],
+                            TextButton(
+                              onPressed: () {
+                                setState(() {
+                                  cartItems.removeAt(index);
+                                });
+                              },
+                              child: const Text("Remove"),
+                            ),
+                          ],
+                        ),
+                      );
+                    },
                   ),
-                );
-              },
-            ),
           ),
 
-          if(savedItems.isNotEmpty)
-            const Divider(),
+          if (savedItems.isNotEmpty) const Divider(),
 
-          if(savedItems.isNotEmpty)
+          if (savedItems.isNotEmpty)
             const Text(
               "Saved For Later",
-              style: TextStyle(fontSize:18,fontWeight:FontWeight.bold),
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
 
-          if(savedItems.isNotEmpty)
+          if (savedItems.isNotEmpty)
             ListView.builder(
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
               itemCount: savedItems.length,
-              itemBuilder: (context,index){
-
+              itemBuilder: (context, index) {
                 final item = savedItems[index];
 
                 return ListTile(
@@ -546,7 +479,7 @@ class _CartPageState extends State<CartPage> {
 
                   trailing: TextButton(
                     child: const Text("Move to Cart"),
-                    onPressed: (){
+                    onPressed: () {
                       setState(() {
                         cartItems.add(item);
                         savedItems.removeAt(index);
@@ -557,34 +490,33 @@ class _CartPageState extends State<CartPage> {
               },
             ),
 
-          if(cartItems.isNotEmpty)
+          if (cartItems.isNotEmpty)
             Padding(
               padding: const EdgeInsets.all(16),
 
               child: Column(
                 children: [
-
                   Text(
                     "Total: \$${getTotal()}",
-                    style: const TextStyle(fontSize:20),
+                    style: const TextStyle(fontSize: 20),
                   ),
 
-                  const SizedBox(height:10),
+                  const SizedBox(height: 10),
 
                   ElevatedButton(
-                    onPressed: (){
+                    onPressed: () {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder:(context)=>const PaymentPage()),
+                          builder: (context) => const PaymentPage(),
+                        ),
                       );
                     },
                     child: const Text("Checkout"),
-                  )
-
+                  ),
                 ],
               ),
-            )
+            ),
         ],
       ),
     );
@@ -601,27 +533,24 @@ class PaymentPage extends StatefulWidget {
 }
 
 class _PaymentPageState extends State<PaymentPage> {
-
   String paymentMethod = "Cash on Delivery";
 
-  void placeOrder(){
-
+  void placeOrder() {
     cartItems.clear();
 
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text("Order Placed Successfully")),
-    );
+    ScaffoldMessenger.of(
+      context,
+    ).showSnackBar(const SnackBar(content: Text("Order Placed Successfully")));
 
     Navigator.pushAndRemoveUntil(
       context,
-      MaterialPageRoute(builder:(context)=>const MainPage()),
-          (route)=>false,
+      MaterialPageRoute(builder: (context) => const MainPage()),
+      (route) => false,
     );
   }
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(title: const Text("Payment")),
 
@@ -630,52 +559,50 @@ class _PaymentPageState extends State<PaymentPage> {
 
         child: Column(
           children: [
-
             const Text(
               "Select Payment Method",
-              style: TextStyle(fontSize:18,fontWeight:FontWeight.bold),
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
 
             RadioListTile(
-              value:"Cash on Delivery",
+              value: "Cash on Delivery",
               groupValue: paymentMethod,
-              onChanged:(value){
+              onChanged: (value) {
                 setState(() {
-                  paymentMethod=value!;
+                  paymentMethod = value!;
                 });
               },
               title: const Text("Cash on Delivery"),
             ),
 
             RadioListTile(
-              value:"UPI",
+              value: "UPI",
               groupValue: paymentMethod,
-              onChanged:(value){
+              onChanged: (value) {
                 setState(() {
-                  paymentMethod=value!;
+                  paymentMethod = value!;
                 });
               },
               title: const Text("UPI"),
             ),
 
             RadioListTile(
-              value:"Credit Card",
+              value: "Credit Card",
               groupValue: paymentMethod,
-              onChanged:(value){
+              onChanged: (value) {
                 setState(() {
-                  paymentMethod=value!;
+                  paymentMethod = value!;
                 });
               },
               title: const Text("Credit Card"),
             ),
 
-            const SizedBox(height:30),
+            const SizedBox(height: 30),
 
             ElevatedButton(
               onPressed: placeOrder,
               child: const Text("Place Order"),
-            )
-
+            ),
           ],
         ),
       ),
@@ -690,14 +617,8 @@ class ProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return const Scaffold(
-      body: Center(
-        child: Text(
-          "Profile Page",
-          style: TextStyle(fontSize:22),
-        ),
-      ),
+      body: Center(child: Text("Profile Page", style: TextStyle(fontSize: 22))),
     );
   }
 }
